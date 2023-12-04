@@ -1,25 +1,56 @@
-<!Doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<style>
-.square {
-	width: 300px;
-	height: 300px;
-	border: red solid 5px;
-}
-.circle {
-	width: 300px;
-	height: 300px;
-	border: blue solid 5px;
-	border-radius: 150px;
-	text-align: center;
-	line-height: 270px;
-}
-</style>
+	<title>The Pot</title>
+	<style>
+		html {
+			height: 100%;
+		}
+
+		html, body {
+			display: block;
+		}
+
+		body {
+			background-image: linear-gradient(to bottom, rgb(0,77,81),rgb(33,57,67));
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+
+		.container {
+			min-height: 100px;
+			height: auto;
+			width: 100%;
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-evenly;
+			align-content: space-around;
+			gap: 20px;
+		}
+
+		.item {
+			width: 100px;
+			min-height: 100px;
+			background: rgb(251, 255, 201);
+			border-radius: 20px;
+			border: solid;
+		}
+
+	</style>
 </head>
 <body>
-<div class='square'>This is a Square
-</div>
-<div class="circle">This is a circle</div>
+	<div class="container">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
 </body>
 </html>
