@@ -12,45 +12,55 @@
 		}
 
 		body {
-			background-image: linear-gradient(to bottom, rgb(0,77,81),rgb(33,57,67));
+			
+		}
+
+		/* background-image: linear-gradient(to bottom, rgb(0,77,81),rgb(33,57,67));
+			background-repeat: no-repeat;
+			background-attachment: fixed; */
+		.pot {
+			width: 100%;
+			height: 100%;
+		}
+
+		.lid {
+			background-image: radial-gradient(rgb(0, 113, 119),rgb(43, 74, 87));
 			background-repeat: no-repeat;
 			background-attachment: fixed;
+
+			border-radius: 50%;
+			width: 500px;
+			height: 250px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -250px);
 		}
 
-		.container {
-			min-height: 100px;
-			height: auto;
-			width: 100%;
-			display: flex;
-			flex-flow: row wrap;
-			justify-content: space-evenly;
-			align-content: space-around;
-			gap: 20px;
-		}
+		.body {
+			background-image: linear-gradient(to bottom,rgb(43, 74, 87),rgb(33,57,67));
+			background-repeat: no-repeat;
+			background-attachment: fixed;
 
-		.item {
-			width: 100px;
-			min-height: 100px;
-			background: rgb(251, 255, 201);
-			border-radius: 20px;
-			border: solid;
+			border-bottom-left-radius: 50%;
+			border-bottom-right-radius: 50%;
+			width: 500px;
+			height: 400px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+			
 		}
 
 	</style>
 </head>
 <body>
-	<div class="container">
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
+	<div class="pot">
+		<div class="body"></div>
+		<div class="lid"></div>
+		<div class="base"></div>
 	</div>
 </body>
 </html>
