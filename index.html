@@ -1,56 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title>The Pot</title>
-	<style>
-		html {
-			height: 100%;
-		}
+    <title>The Pot</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
 
-		html, body {
-			display: block;
-		}
+        body {
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
 
-		body {
-			background-image: linear-gradient(to bottom, rgb(0,77,81),rgb(33,57,67));
-			background-repeat: no-repeat;
-			background-attachment: fixed;
-		}
+        .world {
+            height: calc(100% - 10px);
+            width: calc(100% - 10px);
+            border: 5px solid burlywood;
+        }
+    </style>
+    <script>
+        function randn_bm(min, max, skew) {
+            let u = 0, v = 0;
+            while (u === 0) u = Math.random() //Converting [0,1) to (0,1)
+            while (v === 0) v = Math.random()
+            let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v)
 
-		.container {
-			min-height: 100px;
-			height: auto;
-			width: 100%;
-			display: flex;
-			flex-flow: row wrap;
-			justify-content: space-evenly;
-			align-content: space-around;
-			gap: 20px;
-		}
+            num = num / 10.0 + 0.5 // Translate to 0 -> 1
+            if (num > 1 || num < 0)
+                num = randn_bm(min, max, skew) // resample between 0 and 1 if out of range
 
-		.item {
-			width: 100px;
-			min-height: 100px;
-			background: rgb(251, 255, 201);
-			border-radius: 20px;
-			border: solid;
-		}
+            else {
+                num = Math.pow(num, skew) // Skew
+                num *= max - min // Stretch to fill range
+                num += min // offset to min
+            }
+            return num
+        }
 
-	</style>
+        //objects
+        var duck;
+
+        function startGame() {
+            duck = new component(30, 30, "yellow", document.body.clientWidth / 2, document.body.clientHeight / 2);
+            gameArea.start();
+        };
+
+        var gameArea = {
+            canvas: document.createElement("canvas"),
+            start: function () {
+                this.canvas.width = document.body.clientWidth;
+                this.canvas.height = document.body.clientHeight;
+                //style
+                this.canvas.style.backgroundColor = "lightblue";
+                this.canvas.style.border = "solid black 5px"
+                this.canvas.style.padding = 0;
+                this.canvas.style.margin = 0;
+
+                this.context = this.canvas.getContext("2d");
+                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                this.interval = setInterval(updateGameArea, 20);
+            },
+            stop: function () {
+                clearInterval(this.interval);
+            },
+            clear: function () {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        };
+
+        function component(width, height, color, x, y, type) {
+            this.type = type;
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.angleChange = 0;
+            this.speed = 1;
+            this.update = function () {
+                ctx = gameArea.context;
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+            this.newPos = function () {
+                this.angleChange += randn_bm(-Math.PI / 2, Math.PI / 2, 1);
+                this.x += this.speed * Math.cos(this.angleChange);
+                this.y += this.speed * Math.sin(this.angleChange);
+            }
+        };
+
+        function updateGameArea() {
+            gameArea.clear();
+            duck.newPos();
+            duck.update();
+        };
+        //setup
+        $(document).ready(function () {
+            startGame();
+
+        });
+    </script>
 </head>
+
 <body>
-	<div class="container">
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-		<div class="item"></div>
-	</div>
+    <!-- <div class="world">
+        <div class="duck"></div>
+    </div> -->
 </body>
+
 </html>
