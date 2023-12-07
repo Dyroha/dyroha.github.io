@@ -18,90 +18,16 @@
             border: 0;
         }
     </style>
+    <script src="gameLogic.js"></script>
+    <script src="names.js"></script>
     <script>
-        function randn_bm(min, max, skew) {
-            let u = 0, v = 0;
-            while (u === 0) u = Math.random() //Converting [0,1) to (0,1)
-            while (v === 0) v = Math.random()
-            let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v)
-
-            num = num / 10.0 + 0.5 // Translate to 0 -> 1
-            if (num > 1 || num < 0)
-                num = randn_bm(min, max, skew) // resample between 0 and 1 if out of range
-
-            else {
-                num = Math.pow(num, skew) // Skew
-                num *= max - min // Stretch to fill range
-                num += min // offset to min
-            }
-            return num
-        }
-
-        //objects
-        var duck;
-
-        function startGame() {
-            duck = new component(30, 30, "yellow", document.body.clientWidth / 2, document.body.clientHeight / 2);
-            gameArea.start();
-        };
-
-        var gameArea = {
-            canvas: document.createElement("canvas"),
-            start: function () {
-                this.canvas.width = document.body.clientWidth;
-                this.canvas.height = document.body.clientHeight;
-                //style
-                this.canvas.style.backgroundColor = "lightblue";
-                this.canvas.style.padding = 0;
-                this.canvas.style.margin = 0;
-
-                this.context = this.canvas.getContext("2d");
-                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-                this.interval = setInterval(updateGameArea, 20);
-            },
-            stop: function () {
-                clearInterval(this.interval);
-            },
-            clear: function () {
-                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            }
-        };
-
-        function component(width, height, color, x, y, type) {
-            this.type = type;
-            this.width = width;
-            this.height = height;
-            this.x = x;
-            this.y = y;
-            this.angleChange = 0;
-            this.speed = 1;
-            this.update = function () {
-                ctx = gameArea.context;
-                ctx.fillStyle = color;
-                ctx.fillRect(this.x, this.y, this.width, this.height);
-            }
-            this.newPos = function () {
-                this.angleChange += randn_bm(-Math.PI / 2, Math.PI / 2, 1);
-                this.x += this.speed * Math.cos(this.angleChange);
-                this.y += this.speed * Math.sin(this.angleChange);
-            }
-        };
-
-        function updateGameArea() {
-            gameArea.clear();
-            duck.newPos();
-            duck.update();
-        };
-        //setup
         $(document).ready(function () {
-            startGame();
-
+            game.start(15);
         });
     </script>
 </head>
 
 <body>
-
 </body>
 
 </html>
