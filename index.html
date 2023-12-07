@@ -17,17 +17,27 @@
             padding: 0;
             border: 0;
         }
+
+        #pause {
+            position: fixed;
+            left: 50%;
+            bottom: 0;
+            background-color: white;
+            border: 3px solid black;
+
+        }
     </style>
     <script src="gameLogic.js"></script>
     <script src="names.js"></script>
     <script>
         $(document).ready(function () {
-            game.start(15);
+            game.start(100);
         });
     </script>
 </head>
 
 <body>
+    <div id="pause" onclick="game.pause()">Pause/Play</div>
 </body>
 
 </html>

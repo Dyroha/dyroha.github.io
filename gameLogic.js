@@ -25,7 +25,8 @@ var randomName = function () {
 };
 
 class Duck {
-    constructor(name, radius, color, x, y) {
+    constructor(id, name, radius, color, x, y) {
+        this.id = id;
         this._name = name;
         // this._width = width;
         // this._height = height;
@@ -34,7 +35,7 @@ class Duck {
         this.x = x;
         this.y = y;
         this.angle = 0;
-        this.distance = 1;
+        this.distance = 3;
     }
 
     move() {
@@ -58,15 +59,22 @@ class Duck {
         //if hit another duck reverse angle
         for (let i = 0; i < ducks.length; i++) {
             let duck2 = ducks[i];
+            if(this.id == duck2.id) {
+                continue;
+            }
             let distance =
                 Math.sqrt(
-                    Math.pow(this.x + duck2.x, 2) +
-                        Math.pow(this.y + duck2.y, 2)
+                    Math.pow(this.x - duck2.x, 2) +
+                        Math.pow(this.y - duck2.y, 2)
                 ) -
                 this._radius -
                 duck2._radius;
             if (distance <= 0) {
-                this.direction = -this.direction;
+                //calculate direction so the bounce off eachother
+                this.angle = - Math.atan2(
+                    duck2.y - this.y,
+                    duck2.x - this.x
+                );
             }
         }
     }
@@ -78,13 +86,13 @@ class Duck {
         ctx.arc(this.x, this.y, this._radius, 0, 2 * Math.PI);
         ctx.stroke();
         ctx.fill();
-        ctx.font = "20px Arial";
-        ctx.fillStyle = "black";
-        ctx.fillText(
-            this._name,
-            this.x - this._radius,
-            this.y - this._radius - 5
-        );
+        // ctx.font = "20px Arial";
+        // ctx.fillStyle = "black";
+        // ctx.fillText(
+        //     this._name,
+        //     this.x - this._radius,
+        //     this.y - this._radius - 5
+        // );
     }
 
     update() {
@@ -98,7 +106,8 @@ var ducks = [];
 var game = {
     canvas: document.createElement("canvas"),
     start: function (numDucks) {
-        this.numDucks = numDucks === undefined ? 1 : numDucks;
+        this.ispaused = false;
+        this.numDucks = numDucks;
         this.canvas.width = document.body.clientWidth;
         this.canvas.height = document.body.clientHeight;
         //style
@@ -108,11 +117,12 @@ var game = {
         for (var i = 0; i < this.numDucks; i++) {
             ducks.push(
                 new Duck(
+                    i,
                     randomName(),
-                    30,
+                    Math.random()*50 + 5,
                     "#" + randomColor(),
-                    this.canvas.width / 2,
-                    this.canvas.height / 2
+                    Math.random() * this.canvas.width,
+                    Math.random() * this.canvas.height
                 )
             );
         }
@@ -135,6 +145,18 @@ var game = {
     stop: function () {
         clearInterval(this.interval);
     },
+
+    pause: function () {
+        if(this.ispaused) {
+            this.start();
+            this.ispaused = false;
+        } else {
+            this.stop();
+            this.ispaused = true;
+        }
+        console.log(this.ispaused);
+    },
+
     clear: function () {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
