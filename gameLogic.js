@@ -39,23 +39,24 @@ class Duck {
     }
 
     move() {
-        this.angle += randn_bm(-Math.PI / 2, Math.PI / 2, 1);
         this.x += this.distance * Math.cos(this.angle);
         this.y += this.distance * Math.sin(this.angle);
+        this.angle += randn_bm(-Math.PI / 4, Math.PI / 4, 1);
 
-        //if x or y is outside of the bounds, make angle face center
-        if (
-            this.x - this._radius < 0 ||
-            this.x + this._radius > game.canvas.width ||
-            this.y - this._radius < 0 ||
-            this.y + this._radius > game.canvas.height
-        ) {
-            this.angle = Math.atan2(
-                game.canvas.height / 2 - this.y,
-                game.canvas.width / 2 - this.x
-            );
+        this.distance = 3;
+
+        //if x or y is outside of the bounds, make angle go to middle
+        if (this.x - this._radius < 0) {
+            this.angle = 0;
+        } else if (this.x + this._radius > game.canvas.width) {
+            this.angle = Math.PI;
+        } else if (this.y - this._radius < 0 ) {
+            this.angle = Math.PI / 2;
+        } else if (this.y + this._radius > game.canvas.height) {
+            this.angle = Math.PI * 3 / 2;
         }
 
+        let collisions = 0;
         //if hit another duck reverse angle
         for (let i = 0; i < ducks.length; i++) {
             let duck2 = ducks[i];
@@ -74,8 +75,13 @@ class Duck {
                 this.angle = - Math.atan2(
                     duck2.y - this.y,
                     duck2.x - this.x
-                );
+                ) + Math.random() * Math.PI - Math.PI / 2;
+                collisions++;
             }
+        }
+        
+        if(collisions > 1) {
+            this.angle = Math.random() * Math.PI * 2;
         }
     }
 
@@ -86,6 +92,16 @@ class Duck {
         ctx.arc(this.x, this.y, this._radius, 0, 2 * Math.PI);
         ctx.stroke();
         ctx.fill();
+
+        //draw line in direction of motion
+        ctx.moveTo(this.x, this.y);
+        let pos = {
+            x : this._radius * Math.cos(this.angle) + this.x,
+            y : this._radius * Math.sin(this.angle) + this.y
+        };
+        ctx.lineTo(pos.x, pos.y);
+        ctx.strokeStyle = "black";
+        ctx.stroke();
         // ctx.font = "20px Arial";
         // ctx.fillStyle = "black";
         // ctx.fillText(
