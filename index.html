@@ -18,13 +18,21 @@
             border: 0;
         }
 
-        #pause {
+        .settings {
             position: fixed;
-            left: 50%;
             bottom: 0;
+            display: flex;
+            gap: 2px;
+            width: 100%;
+            justify-content: center;
+        }
+        .button {
             background-color: white;
             border: 3px solid black;
 
+            &:hover {
+                background-color: lightyellow;
+            }
         }
     </style>
     <script src="gameLogic.js"></script>
@@ -37,7 +45,11 @@
 </head>
 
 <body>
-    <div id="pause" onclick="game.pause()">Pause/Play</div>
+    <div class="settings">
+        <div id="pause" class="button" onclick="game.pause()">Pause/Play</div>
+        <div id="debug" class="button" onclick="game.debug()">Debug</div>
+    </div>
+    
 </body>
 
 </html>

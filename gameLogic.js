@@ -93,15 +93,18 @@ class Duck {
         ctx.stroke();
         ctx.fill();
 
-        //draw line in direction of motion
-        ctx.moveTo(this.x, this.y);
-        let pos = {
-            x : this._radius * Math.cos(this.angle) + this.x,
-            y : this._radius * Math.sin(this.angle) + this.y
-        };
-        ctx.lineTo(pos.x, pos.y);
-        ctx.strokeStyle = "black";
-        ctx.stroke();
+        if (game.isdebug) {
+            //draw line in direction of motion
+            ctx.moveTo(this.x, this.y);
+            let pos = {
+                x : this._radius * Math.cos(this.angle) + this.x,
+                y : this._radius * Math.sin(this.angle) + this.y
+            };
+            ctx.lineTo(pos.x, pos.y);
+            ctx.strokeStyle = "black";
+            ctx.stroke();
+        }
+        
         // ctx.font = "20px Arial";
         // ctx.fillStyle = "black";
         // ctx.fillText(
@@ -123,6 +126,7 @@ var game = {
     canvas: document.createElement("canvas"),
     start: function (numDucks) {
         this.ispaused = false;
+        this.isdebug = false;
         this.numDucks = numDucks;
         this.canvas.width = document.body.clientWidth;
         this.canvas.height = document.body.clientHeight;
@@ -171,6 +175,16 @@ var game = {
             this.ispaused = true;
         }
         console.log(this.ispaused);
+    },
+
+    debug: function () {
+        if(this.isdebug) {
+            console.log("Debug mode off");
+            this.isdebug = false;
+        } else {
+            console.log("Debug mode on")
+            this.isdebug = true;
+        }
     },
 
     clear: function () {
