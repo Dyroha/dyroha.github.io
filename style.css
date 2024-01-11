@@ -1,0 +1,115 @@
+/* colours
+    background: #5D675B
+    border: #F78E69, #ABE188
+    headings: #F1BB87
+    text: #F7EF99
+
+*/
+
+html,
+body {
+    width: 100%;
+    display: block;
+    padding: 0;
+    margin: 0;
+    color: #f7ef99;
+    background-color: #5d675b;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 42px;
+}
+h2 {
+    font-size: 33px;
+}
+h3 {
+    font-size: 26px;
+}
+h4 {
+    font-size: 20px;
+}
+
+.header {
+    width: 100%;
+    height: 120px;
+    background-color: #454d44;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-around;
+    align-items: center;
+    justify-items: center;
+    border-bottom: solid 3px #abe188;
+}
+
+.left-head {
+    height: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.img-wrapper {
+    height: 85%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin: 2%;
+    background: linear-gradient(217deg, #abe188, #abe18800 70.71%),
+        linear-gradient(127deg, #f78e69, #f78e6900 70.71%),
+        linear-gradient(336deg, #f7ef99, #f7ef9900 70.71%);
+}
+
+.self-img {
+    height: calc(100% - 5px);
+    border-radius: 50%;
+    border: solid transparent;
+}
+
+.menu-items {
+    width: 350px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.menu-item {
+    text-align: center;
+    border: solid #f78e69;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.title {
+    grid-area: title;
+    border-bottom: solid #f78e69;
+    padding-bottom: 15px;
+    width: 80%;
+}
+
+.main {
+    grid-area: main;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: rgba(255, 255, 255, 0.57);
+    width: 100%;
+    margin: 10px;
+    border-radius: 10px;
+    border: solid 3px;
+}
+
+.animation {
+    height: 100%;
+    width: 100%;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 5% 10% 15% 40% 15% 10% 5%;
+    grid-template-rows: auto;
+    grid-template-areas:
+        ". title title title sidebar sidebar ."
+        ". main main main sidebar sidebar .";
+}

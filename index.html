@@ -2,54 +2,50 @@
 <html lang="en">
 
 <head>
-    <title>The Pot</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Dylan Hamilton</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Exo 2' rel='stylesheet'>
     <style>
-        html,
         body {
-            height: 100%;
-            overflow: hidden;
-        }
-
-        body {
-            display: block;
-            margin: 0;
-            padding: 0;
-            border: 0;
-        }
-
-        .settings {
-            position: fixed;
-            bottom: 0;
-            display: flex;
-            gap: 2px;
-            width: 100%;
-            justify-content: center;
-        }
-        .button {
-            background-color: white;
-            border: 3px solid black;
-
-            &:hover {
-                background-color: lightyellow;
-            }
+            font-family: 'Exo 2';
+            font-size: 22px;
         }
     </style>
-    <script src="gameLogic.js"></script>
-    <script src="names.js"></script>
-    <script>
-        $(document).ready(function () {
-            game.start(100);
-        });
-    </script>
 </head>
 
 <body>
-    <div class="settings">
-        <div id="pause" class="button" onclick="game.pause()">Pause/Play</div>
-        <div id="debug" class="button" onclick="game.debug()">Debug</div>
+    <div class="header">
+        <div class="left-head">
+            <div class="img-wrapper">
+                <img class="self-img" src="https://avatars.githubusercontent.com/u/61585425?v=4">
+            </div>
+            <h2>Dylan Hamilton</h2>
+        </div>
+        <div class="menu-items">
+            <div class="menu-item">Here</div>
+            <div class="menu-item">There</div>
+            <div class="menu-item">Somewhere</div>
+        </div>
     </div>
-    
+
+    <div class="main-content">
+        <h1 class="title">This is My Web CV</h1>
+        <div class="main">
+            <h2>About Me</h2>
+            <p>I am a recent graduate from The University of Kent. I have First BSc (Hons) Computer Science (Artificial
+                Intelligence).
+            </p>
+            <p>
+                I am proficient in HTML, CSS and Java Script and have knowledge of and used AJAX, JSON and MVC as well
+                as relational databases. I have also used Azure for personal and professional projects.
+            </p>
+            <p>I am passionate about AI and it's potential applications in business and personal. My degree had a focus
+                on AI using Evolutionary Algorithms as well as Machine Learning.</p>
+        </div>
+        <!-- <div class="sidebar">
+            <canvas class="animation"></canvas>
+        </div> -->
+    </div>
 </body>
 
 </html>
