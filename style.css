@@ -54,13 +54,16 @@ h4 {
     aspect-ratio: 1;
     border-radius: 50%;
     margin: 2%;
-    background: linear-gradient(217deg, #abe188, #abe18800 70.71%),
-        linear-gradient(127deg, #f78e69, #f78e6900 70.71%),
-        linear-gradient(336deg, #f7ef99, #f7ef9900 70.71%);
+    background: conic-gradient(#f7ef99,#f78e69, #f78e69, #abe188, #abe188,#f7ef99);
 }
 
 .self-img {
-    height: calc(100% - 5px);
+    margin: 0;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: calc(100% - 6px);   
     border-radius: 50%;
     border: solid transparent;
 }
@@ -89,15 +92,16 @@ h4 {
 
 .main {
     grid-area: main;
+    height: 100%;
 }
 
 .sidebar {
     grid-area: sidebar;
-    background-color: rgba(255, 255, 255, 0.57);
+    background-color: rgba(255, 255, 255, 0.062);
     width: 100%;
     margin: 10px;
     border-radius: 10px;
-    border: solid 3px;
+    position: relative;
 }
 
 .animation {
@@ -107,9 +111,9 @@ h4 {
 
 .main-content {
     display: grid;
-    grid-template-columns: 5% 10% 15% 40% 15% 10% 5%;
+    grid-template-columns: 3.9% 6.6% 17.1% 44.8% 17.1% 6.6% 3.9%;
     grid-template-rows: auto;
     grid-template-areas:
-        ". title title title sidebar sidebar ."
-        ". main main main sidebar sidebar .";
+        ". title title title . sidebar ."
+        ". main main main . sidebar .";
 }
