@@ -49,12 +49,72 @@ h4 {
     gap: 10px;
 }
 
+@keyframes rotate {
+    0%,
+    100% {
+        background: conic-gradient(
+            #f7ef99 60deg,
+            #f78e69 90deg 150deg,
+            #abe188 210deg 270deg,
+            #f7ef99 330deg
+        );
+    }
+    33% {
+        background: conic-gradient(
+            #abe188,
+            #f7ef99,
+            #f7ef99,
+            #f78e69,
+            #f78e69,
+            #abe188
+        );
+    }
+
+    66% {
+        background: conic-gradient(
+            #f78e69,
+            #abe188,
+            #abe188,
+            #f7ef99,
+            #f7ef99,
+            #f78e69
+        );
+    }
+}
+
+@property --a {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
 .img-wrapper {
-    height: 85%;
+    height: 90%;
     aspect-ratio: 1;
     border-radius: 50%;
     margin: 2%;
-    background: conic-gradient(#f7ef99,#f78e69, #f78e69, #abe188, #abe188,#f7ef99);
+    background: conic-gradient(
+        from var(--a),
+        #f7ef99 60deg,
+        #f78e69 90deg 150deg,
+        #abe188 210deg 270deg,
+        #f7ef99 330deg
+    );
+    animation: a 10s linear infinite;
+}
+
+@keyframes a {
+    from {
+        --a: 0deg;
+    }
+
+    50% {
+        --a: 180deg;
+    }
+
+    to {
+        --a: 360deg;
+    }
 }
 
 .self-img {
@@ -63,7 +123,7 @@ h4 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: calc(100% - 6px);   
+    height: calc(100% - 10px);
     border-radius: 50%;
     border: solid transparent;
 }
