@@ -1,7 +1,18 @@
+const changeLightness = (delta, hslStr) => {
+    const [hue, saturation, lightness] = hslStr.match(/\d+/g).map(Number);
+  
+    const newLightness = Math.max(
+      0,
+      Math.min(100, lightness + parseFloat(delta))
+    );
+  
+    return `hsl(${hue}, ${saturation}%, ${newLightness}%)`;
+  };
+
 const canvas = document.getElementById("anim");
 const context = canvas.getContext("2d");
 setSize();
-const c = ["FF0000", "00FF00", "0000FF", "FFFF00", "00FFFF", "FF00FF"];
+const c = ["hsl(0, 100%, 50%)", "hsl(120, 100%, 50%)", "hsl(240, 100%, 50%)", "hsl(60, 100%, 50%)", "hsl(180, 100%, 50%)", "hsl(300, 100%, 50%)"];
 let particlesArray = [];
 
 class Particle {
@@ -9,11 +20,10 @@ class Particle {
         this.x = Math.random() * canvas.width;
         this.y = -Math.random() * canvas.height;
         this.size = size;
-        this.color = color;
+        this.color = changeLightness(-(50 / (size-5)),color);
         this.rotateSpeed = 0.05;
         this.fallSpeed = Math.random() + size / 20;
         this.theta = Math.random() * 2 * Math.PI;
-        this.alpha = Math.floor(((size - 9) / 11) * 255).toString(16);
     }
 
     animate() {
@@ -29,7 +39,7 @@ class Particle {
         //animate
         context.beginPath();
         context.lineWidth = (this.size * 2) / 3;
-        context.strokeStyle = "#" + this.color + this.alpha;
+        context.strokeStyle =this.color;
         context.moveTo(
             this.x + (this.size / 2) * Math.cos(this.theta),
             this.y + (this.size / 2) * Math.sin(this.theta)
