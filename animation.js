@@ -17,12 +17,18 @@ let particlesArray = [];
 
 class Particle {
     constructor(size, color) {
+        this.initialiseParticle(size,color);
+    }
+
+    initialiseParticle(size = this.size, color = null) {
         this.x = Math.random() * canvas.width;
         this.y = -Math.random() * canvas.height;
         this.size = size;
-        this.color = changeLightness(-(50 / (size-5)),color);
+        if (color != null) {
+            this.color = changeLightness(-(50 / (size-5)),color)
+        }
         this.rotateSpeed = 0.05;
-        this.fallSpeed = Math.random() + size / 20;
+        this.fallSpeed = size / 20;
         this.theta = Math.random() * 2 * Math.PI;
     }
 
@@ -32,8 +38,8 @@ class Particle {
 
         //fall
         this.y += this.fallSpeed;
-        if (this.y > canvas.height) {
-            this.y -= canvas.height + Math.random() * canvas.height;
+        if ((this.y - this.size) > canvas.height) {
+            this.initialiseParticle();
         }
 
         //animate
