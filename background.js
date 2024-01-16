@@ -1,5 +1,16 @@
-const triangle = "<div class='triangle'><div class='tpart ttop'></div><div class='tpart tleft'></div><div class='tpart tright'></div></div>";
+const triangle = document.createElement("div");
+triangle.classList.add("triangle");
+const tflipped = triangle.cloneNode(true);
+tflipped.classList.add("flipped");
+const background = document.getElementById("background");
+let width = background.offsetWidth;
+let height = background.offsetHeight;
+const theight = 173.2;
+const twidth = 200;
 
-let width = innerWidth;
-let height = innerHeight;
-
+let across = width / twidth;
+let down = height / theight;
+for (let i = 0; i < across * down; i++) {
+    background.appendChild(triangle.cloneNode(true));
+    background.appendChild(tflipped.cloneNode(true));
+}
