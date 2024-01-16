@@ -23,7 +23,7 @@ body {
     color: var(--text);
     background-color: var(--background);
     font-size: 16px;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 h1 {
@@ -155,8 +155,7 @@ h4 {
 
 .background {
     position: absolute;
-    width: calc(100% + 300px);
-    transform: translate(-150px, 0);
+    width: calc(100% + 200px);
     height: 100%;
     display: flex;
     flex-wrap: wrap;
