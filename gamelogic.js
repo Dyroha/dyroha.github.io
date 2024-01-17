@@ -3,6 +3,7 @@ const inputBox = document.getElementById("text-input");
 let pauseTime = 100;
 let startingText = "Hello player, enter some text";
 let typing = false;
+let count = 0;
 
 function letterByLetter(text) {
     if (text == "") {
@@ -13,13 +14,22 @@ function letterByLetter(text) {
     setTimeout(() => letterByLetter(text.substring(1)), pauseTime);
 }
 
+function outputNumber() {
+    return "[" + (count++).toString() + "] ";
+}
+
+function printOutput(text) {
+    typing = true;
+    outputBox.innerHTML += outputNumber();
+    letterByLetter(text);
+}
+
 function sendInput() {
     if (!typing) {
-        typing = true;
         let text = inputBox.value;
-        outputBox.innerHTML += "</br>";
-        letterByLetter(text);
+        outputBox.innerHTML += "</br>-> " + text + "</br>";
+        printOutput("That's very interesting, tell me more");
     }
 }
 
-letterByLetter(startingText);
+printOutput(startingText);
