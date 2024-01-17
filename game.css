@@ -1,0 +1,32 @@
+html,
+body {
+    margin: 0;
+    display: block;
+    overflow: hidden;
+}
+body {
+    background-color: antiquewhite;
+}
+
+#game-window {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+}
+
+#output {
+    width: calc(100% - 20px);
+    border: 10px inset;
+    height: calc(80% - 20px);
+    background-color: rgba(0, 0, 0, 0.05);
+    overflow-y: scroll;
+}
+
+#input {
+    width: calc(100% - 6px);
+    height: calc(20% - 6px);
+    border: 3px solid black;
+}
