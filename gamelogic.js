@@ -5,9 +5,22 @@ let startingText = "Hello player, enter some text";
 let typing = false;
 let count = 0;
 
+let rtinput = document.createElement("div");
+rtinput.id += "rtinput";
+let i = document.createElement("span");
+i.classList += "rtinput-text";
+let idleArrow = document.createElement("span");
+idleArrow.innerHTML = "-> ";
+idleArrow.classList += "input-start ";
+idleArrow.classList += "idling";
+rtinput.appendChild(idleArrow);
+rtinput.appendChild(i);
+
 function letterByLetter(text) {
     if (text == "") {
+        outputBox.innerHTML += "</br>";
         typing = false;
+        idleOutputBox();
         return;
     }
     outputBox.innerHTML += text.charAt(0);
@@ -15,7 +28,7 @@ function letterByLetter(text) {
 }
 
 function outputNumber() {
-    return "[" + (count++).toString() + "] ";
+    return "<span class='output-start'>[" + (count++).toString() + "]</span> ";
 }
 
 function printOutput(text) {
@@ -26,10 +39,32 @@ function printOutput(text) {
 
 function sendInput() {
     if (!typing) {
+        outputBox.removeChild(rtinput);
         let text = inputBox.value;
-        outputBox.innerHTML += "</br>-> " + text + "</br>";
+        inputBox.value = "";
+        outputBox.innerHTML +=
+            "<span class='input-start'>-></span> " + text + "</br>";
         printOutput("That's very interesting, tell me more");
     }
+}
+
+inputBox.addEventListener("keypress", function (event) {
+    if ((event.key === "Enter") & (inputBox.value != "")) {
+        event.preventDefault();
+        sendInput();
+    }
+});
+
+function idleOutputBox() {
+    outputBox.appendChild(rtinput);
+}
+
+function updateRTInput() {
+    i.innerHTML = inputBox.value;
+}
+
+function inputFocus() {
+    inputBox.focus();
 }
 
 printOutput(startingText);

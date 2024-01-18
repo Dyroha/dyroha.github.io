@@ -2,16 +2,16 @@
 <html lang="en">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>A test for a game</title>
     <link rel="stylesheet" href="game.css">
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet'>
 </head>
 
 <body>
-    <div id="game-window">
-        <div id="output"></div>
-        <div id="input">
-            <input id="text-input" class="text-input" type="text">
-            <button class="send-button" onclick="sendInput()">Submit</button>
+    <input id="text-input" class="text-input" type="text" autofocus onkeyup="updateRTInput()">
+    <div id="game-window" onclick="inputFocus()">
+        <div id="output">
         </div>
     </div>
     <script src="gamelogic.js"></script>
