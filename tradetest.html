@@ -9,12 +9,15 @@
 </head>
 
 <body>
-    <input id="text-input" class="text-input" type="text" autofocus onkeyup="updateRTInput()">
-    <div id="game-window" onclick="inputFocus()">
-        <div id="output">
-        </div>
+    <div class="menu">
+        <div class="ts-options"></div>
+        <div class="font-options"></div>
     </div>
-    <script src="gamelogic.js"></script>
+    <div class="menu-icon"></div>
+    <input id="text-input" class="text-input" type="text" autofocus onkeyup="updateRTInput()">
+    <div id="output" onclick="inputFocus()">
+    </div>
+    <script src="iogamelogic.js"></script>
 </body>
 
 </html>

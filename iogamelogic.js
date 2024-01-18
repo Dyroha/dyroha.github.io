@@ -28,7 +28,7 @@ function letterByLetter(text) {
 }
 
 function outputNumber() {
-    return "<span class='output-start'>[" + (count++).toString() + "]</span> ";
+    return "<span class='output-start'>[" + (count++).toString() + "]</span>";
 }
 
 function printOutput(text) {
@@ -43,7 +43,7 @@ function sendInput() {
         let text = inputBox.value;
         inputBox.value = "";
         outputBox.innerHTML +=
-            "<span class='input-start'>-></span> " + text + "</br>";
+            "<span class='input-start'>-></span> " + text + "</br> ";
         printOutput("That's very interesting, tell me more");
     }
 }
@@ -68,3 +68,9 @@ function inputFocus() {
 }
 
 printOutput(startingText);
+
+//Menu logic
+
+function menuClick() {
+    console.log("menu clicked");
+}
