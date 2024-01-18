@@ -21,6 +21,7 @@ function letterByLetter(text) {
         outputBox.innerHTML += "</br>";
         typing = false;
         idleOutputBox();
+        scrollToBottom();
         return;
     }
     outputBox.innerHTML += text.charAt(0);
@@ -67,10 +68,19 @@ function inputFocus() {
     inputBox.focus();
 }
 
+function scrollToBottom() {
+    outputBox.scrollTo(0, outputBox.scrollHeight);
+}
+
 printOutput(startingText);
 
 //Menu logic
-
 function menuClick() {
     console.log("menu clicked");
 }
+
+let slider = document.getElementById("fontSize");
+slider.oninput = function () {
+    console.log(outputBox.style.fontSize);
+    outputBox.style.fontSize = this.value.toString() + "px";
+};
