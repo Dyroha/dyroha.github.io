@@ -79,8 +79,40 @@ function menuClick() {
     console.log("menu clicked");
 }
 
+//font size slider logic
 let slider = document.getElementById("fontSize");
 slider.oninput = function () {
-    console.log(outputBox.style.fontSize);
-    outputBox.style.fontSize = this.value.toString() + "px";
+    //change font size
+    let value = this.value;
+    let size = value.toString() + "px";
+    outputBox.style.fontSize = size;
+    setCookie("fontSize", size, 7);
+
+    moveSNum(this);
 };
+
+slider.onmousedown = function () {
+    moveSNum(this);
+};
+slider.onmouseup = function () {
+    //make snum invisible
+    let snum = document.getElementById("snumber");
+    snum.style.display = "none";
+};
+
+function moveSNum(slider) {
+    //make snumber change and follow slider thumb
+    let value = slider.value;
+    let sliderRect = slider.getBoundingClientRect();
+    let snum = document.getElementById("snumber");
+    snum.style.display = "block";
+    snum.innerHTML = slider.value + "px";
+    snum.style.top = sliderRect.top - slider.offsetHeight * 3 + "px";
+    snum.style.left =
+        sliderRect.left +
+        (slider.value / slider.max) * slider.offsetWidth -
+        snum.offsetWidth / 2 +
+        "px";
+}
+
+//radio button text speed logic

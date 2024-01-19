@@ -63,6 +63,45 @@ body {
     position: absolute;
     bottom: 0;
     right: 50%;
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#snumber {
+    color: #f1f1f1;
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+}
+
+#fontSize {
+    appearance: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 90%;
+    height: 10px;
+    left: 0;
+    transform: translate(5%, 0);
+    background-color: #f1f1f1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+#fontSize:hover {
+    opacity: 1;
+}
+
+#fontSize::-webkit-slider-thumb {
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background: #82b1d7;
+}
+
+#fontSize::-webkit-slider-thumb:hover {
+    background: #aad4f9;
 }
 
 #output {
