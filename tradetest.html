@@ -10,18 +10,35 @@
 
 <body>
     <div class="menu">
-        <div class="ts-options"></div>
         <div class="font-options">
-            <div id="snumber">No</div>
+            <span>font size</span>
+            <div style="height: 10px;"></div>
+            <div id="snumber"></div>
             <input type="range" min="10" max="60" value="40" class="slider" id="fontSize">
         </div>
+        <form name="tsform" class="ts-options">
+            <span>text speed</span><br>
+            <div class="radio-option">
+                <label for="ts1">fast -></label>
+                <input type="radio" id="ts1" name="ts" value="0"><br>
+            </div>
+            <div class="radio-option">
+                <label for="ts1">medium -></label>
+                <input type="radio" id="ts2" name="ts" value="100"><br>
+            </div>
+            <div class="radio-option">
+                <label for="ts1">slow -></label>
+                <input type="radio" id="ts3" name="ts" value="500">
+            </div>
+        </form>
     </div>
     <div class="menu-icon"></div>
-    <input id="text-input" class="text-input" type="text" autofocus onkeyup="updateRTInput()">
+    <input id="text-input" class="text-input" type="text" autofocus>
     <div id="output" onclick="inputFocus()">
     </div>
     <script src="iogamelogic.js"></script>
     <script src="gamecookies.js"></script>
+    <script src="gamecommands.js"></script>
 </body>
 
 </html>

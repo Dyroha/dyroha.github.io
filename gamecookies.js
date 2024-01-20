@@ -11,12 +11,11 @@ function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == " ") {
+    for (let c of ca) {
+        while (c.startsWith(" ")) {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.startsWith(name)) {
             return c.substring(name.length, c.length);
         }
     }
@@ -39,6 +38,13 @@ function initializeTextSpeed() {
     let time = getCookie("pauseTime");
     if (time != "") {
         pauseTime = parseInt(time);
+        if (time == "0") {
+            document.tsform.ts1.checked = true;
+        } else if (time == "500") {
+            document.getElementById("ts3").checked = true;
+        } else {
+            document.getElementById("ts2").checked = true;
+        }
     }
 }
 

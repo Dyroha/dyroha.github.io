@@ -61,10 +61,12 @@ body {
 
 .menu {
     position: absolute;
-    bottom: 0;
-    right: 50%;
-    height: 100px;
+    bottom: 10px;
+    right: 10px;
+    height: 200px;
     background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 #snumber {
@@ -102,6 +104,16 @@ body {
 
 #fontSize::-webkit-slider-thumb:hover {
     background: #aad4f9;
+}
+
+.ts-options {
+    width: 100%;
+}
+
+.radio-option {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 #output {
@@ -147,12 +159,23 @@ body {
 #text-input {
     position: absolute;
     box-sizing: border-box;
-    width: 0;
-    height: 0;
-    transform: translate(-10px, -10px);
-    background-color: transparent;
     border: none;
     user-select: none;
+    left: 10px;
+    bottom: 10px;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    outline: none;
+    color: transparent;
+}
+
+#text-input:hover {
+    background: white;
+    color: black;
 }
 
 .input-start {

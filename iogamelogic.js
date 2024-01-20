@@ -1,5 +1,6 @@
 const outputBox = document.getElementById("output");
 const inputBox = document.getElementById("text-input");
+let lastMessage = "echo";
 let pauseTime = 100;
 let startingText = "Hello player, enter some text";
 let typing = false;
@@ -16,49 +17,69 @@ idleArrow.classList += "idling";
 rtinput.appendChild(idleArrow);
 rtinput.appendChild(i);
 
-function letterByLetter(text) {
+function letterByLetter(text, t) {
     if (text == "") {
         outputBox.innerHTML += "</br>";
         typing = false;
         idleOutputBox();
         scrollToBottom();
         return;
+    } else if (text.startsWith("\n")) {
+        outputBox.innerHTML += "</br>";
+    } else {
+        outputBox.innerHTML += text.charAt(0);
     }
-    outputBox.innerHTML += text.charAt(0);
-    setTimeout(() => letterByLetter(text.substring(1)), pauseTime);
+    setTimeout(() => letterByLetter(text.substring(1)), t);
 }
 
 function outputNumber() {
     return "<span class='output-start'>[" + (count++).toString() + "]</span>";
 }
 
-function printOutput(text) {
+function printOutput(text, t = pauseTime) {
     typing = true;
     outputBox.innerHTML += outputNumber();
-    letterByLetter(text);
+    letterByLetter(text, t);
 }
 
 function sendInput() {
     if (!typing) {
         outputBox.removeChild(rtinput);
         let text = inputBox.value;
-        inputBox.value = "";
+        resetInput();
         outputBox.innerHTML +=
             "<span class='input-start'>-></span> " + text + "</br> ";
-        printOutput("That's very interesting, tell me more");
+        doCommand(text);
     }
 }
 
-inputBox.addEventListener("keypress", function (event) {
+inputBox.addEventListener("keyup", function (event) {
     if ((event.key === "Enter") & (inputBox.value != "")) {
         event.preventDefault();
         sendInput();
+    } else if (event.key === "q") {
+        stopGame();
+        if (gamePlaying) {
+            resetInput();
+        }
+    } else if (event.key === "ArrowUp") {
+        inputBox.value = lastMessage;
+        i.innerHTML = lastMessage;
     }
 });
+
+function resetInput() {
+    i.innerHTML = "";
+    inputBox.value = "";
+}
 
 function idleOutputBox() {
     outputBox.appendChild(rtinput);
 }
+
+inputBox.addEventListener("keyup", function () {
+    updateRTInput();
+});
 
 function updateRTInput() {
     i.innerHTML = inputBox.value;
@@ -116,3 +137,20 @@ function moveSNum(slider) {
 }
 
 //radio button text speed logic
+let ts1 = document.getElementById("ts1");
+ts1.onchange = function () {
+    pauseTime = this.value;
+    setCookie("pauseTime", this.value);
+};
+
+let ts2 = document.getElementById("ts2");
+ts2.onchange = function () {
+    pauseTime = this.value;
+    setCookie("pauseTime", this.value);
+};
+
+let ts3 = document.getElementById("ts3");
+ts3.onchange = function () {
+    pauseTime = this.value;
+    setCookie("pauseTime", this.value);
+};
