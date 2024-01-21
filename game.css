@@ -190,6 +190,10 @@ body {
     animation: idle 1s steps(1, end) infinite;
 }
 
+.ibar {
+    position: absolute;
+}
+
 @keyframes idle {
     from,
     to {
@@ -198,4 +202,9 @@ body {
     50% {
         opacity: 0;
     }
+}
+
+#rtinput::after {
+    content: "|";
+    animation: idle 1s steps(1, end) infinite;
 }

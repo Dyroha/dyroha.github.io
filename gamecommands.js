@@ -6,7 +6,7 @@ let helpArr = [
     "commands available are as follows:",
     "help: opens the list of available commands",
     "calc {equation}: is used as a simple calculator with + - * / functionality",
-    "echo {}: repeats last sent message",
+    "echo {text}: repeats last sent message",
     "play game: opens up a game you can play",
     "",
     "you can also use the up arrow key to select the last command",

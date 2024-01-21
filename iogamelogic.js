@@ -1,20 +1,22 @@
 const outputBox = document.getElementById("output");
 const inputBox = document.getElementById("text-input");
-let lastMessage = "echo";
+let lastMessage = "";
 let pauseTime = 100;
-let startingText = "Hello player, enter some text";
+let startingText = "Hello user, type help to see the available commands";
 let typing = false;
 let count = 0;
 
 let rtinput = document.createElement("div");
 rtinput.id += "rtinput";
-let i = document.createElement("span");
-i.classList += "rtinput-text";
+
 let idleArrow = document.createElement("span");
 idleArrow.innerHTML = "-> ";
 idleArrow.classList += "input-start ";
-idleArrow.classList += "idling";
+// idleArrow.classList += "idling";
 rtinput.appendChild(idleArrow);
+
+let i = document.createElement("span");
+i.classList += "rtinput-text";
 rtinput.appendChild(i);
 
 function letterByLetter(text, t) {
@@ -66,7 +68,15 @@ inputBox.addEventListener("keyup", function (event) {
         inputBox.value = lastMessage;
         i.innerHTML = lastMessage;
     }
+    updateRTInput();
 });
+
+inputBox.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowLeft" | event.key === "ArrowRight" | event.key === "ArrowUp" | event.key === "ArrowDown") {
+        console.log("l or r");
+        event.preventDefault();
+    }
+})
 
 function resetInput() {
     i.innerHTML = "";
@@ -76,10 +86,6 @@ function resetInput() {
 function idleOutputBox() {
     outputBox.appendChild(rtinput);
 }
-
-inputBox.addEventListener("keyup", function () {
-    updateRTInput();
-});
 
 function updateRTInput() {
     i.innerHTML = inputBox.value;
