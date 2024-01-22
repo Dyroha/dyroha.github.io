@@ -13,61 +13,119 @@ body {
     background-color: #1d1f21;
 }
 
-.menu-icon {
+/* menu icon css */
+
+.menu-icon-wrapper {
     position: absolute;
-    width: 50px;
-    height: 50px;
-    background-image: linear-gradient(
-        transparent 0%,
-        transparent 8.33%,
-        #c5c5c5 8.33%,
-        #c5c5c5 25%,
-        transparent 25%,
-        transparent 41.66%,
-        #c5c5c5 41.66%,
-        #c5c5c5 58.33%,
-        transparent 58.33%,
-        transparent 75%,
-        #c5c5c5 75%,
-        #c5c5c5 91.66%,
-        transparent 91.66%,
-        transparent 100%
-    );
-    transition: all 0.2s ease-in-out;
     margin: 5px;
     right: 15px;
     top: 15px;
+    height: 50px;
+    width: 50px;
+    transition: all 0.2s ease-in-out;
 }
 
-.menu-icon:hover {
-    transform: translate(-2.5px, 0);
-    background-image: linear-gradient(
-        transparent 0%,
-        transparent 8.33%,
-        #a9a9a9 8.33%,
-        #a9a9a9 25%,
-        transparent 25%,
-        transparent 41.66%,
-        #a9a9a9 41.66%,
-        #a9a9a9 58.33%,
-        transparent 58.33%,
-        transparent 75%,
-        #a9a9a9 75%,
-        #a9a9a9 91.66%,
-        transparent 91.66%,
-        transparent 100%
-    );
+.menu-icon-checkbox {
+    position: absolute;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
+
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+}
+
+.menu-icon {
+    height: 100%;
+}
+
+.menu-icon-middle {
+    position: absolute;
+    height: 16.66%;
+    width: 100%;
+    top: 50%;
+    transform: translate(0,-50%);
+    background-color: #c5c8c6;
+    transition: all 0.2s ease-in-out;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+    content: "";
+    height: 16.66%;
+    background-color: #c5c8c6;
+}
+
+.menu-icon::before {
+    top: 8.33%;
+}
+
+.menu-icon::after {
+    bottom: 8.33%;
+}
+
+/* hover animations */
+.menu-icon-wrapper:hover {
+    transform: translate(-3px,0);
+}
+
+.menu-icon-wrapper:hover .menu-icon::before,
+.menu-icon-wrapper:hover .menu-icon::after,
+.menu-icon-wrapper:hover .menu-icon-middle {
+    background-color: #888;
+}
+
+/* click animations */
+.menu-icon-middle:has( ~ .menu-icon-checkbox:checked) {
+    background-color: transparent;
+}
+
+.menu-icon:has( ~ .menu-icon-checkbox:checked)::before {
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%) rotate(45deg) scale(110%);
+    background-color: #a54242;
+}
+
+.menu-icon:has( ~ .menu-icon-checkbox:checked)::after {
+    left: 0;
+    bottom: 50%;
+    transform: translate(0, 50%) rotate(-45deg) scale(110%);
+    background-color: #a54242;
+}
+
+/* menu css*/
 
 .menu {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    height: 200px;
-    background-color: rgba(255, 255, 255, 0.1);
+    width: 300px;
+    top: 10px;
+    left: 100%;
+    height: auto;
+    background-color: #555;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    transition: all 0.2s ease-in;
 }
+
+/* menu show on menu-icon checked */
+.menu:has( ~ .menu-icon-wrapper .menu-icon-checkbox:checked) {
+    transform: translate(calc(-100% - 10px),0);
+}
+
+
+/* other stuff */
 
 #snumber {
     color: #f1f1f1;
