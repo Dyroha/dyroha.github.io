@@ -39,7 +39,7 @@ function stopGame() {
 }
 
 function resetGame() {
-    gameTimer = 500;
+    gameTimer = 250;
     gameState = {
         0: " ".repeat(20),
         1: " ".repeat(20),
