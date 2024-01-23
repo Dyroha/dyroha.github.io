@@ -72,11 +72,16 @@ inputBox.addEventListener("keyup", function (event) {
 });
 
 inputBox.addEventListener("keydown", function (event) {
-    if (event.key === "ArrowLeft" | event.key === "ArrowRight" | event.key === "ArrowUp" | event.key === "ArrowDown") {
+    if (
+        (event.key === "ArrowLeft") |
+        (event.key === "ArrowRight") |
+        (event.key === "ArrowUp") |
+        (event.key === "ArrowDown")
+    ) {
         console.log("l or r");
         event.preventDefault();
     }
-})
+});
 
 function resetInput() {
     i.innerHTML = "";
@@ -130,16 +135,10 @@ slider.onmouseup = function () {
 function moveSNum(slider) {
     //make snumber change and follow slider thumb
     let value = slider.value;
-    let sliderRect = slider.getBoundingClientRect();
     let snum = document.getElementById("snumber");
     snum.style.display = "block";
-    snum.innerHTML = slider.value + "px";
-    snum.style.top = sliderRect.top - slider.offsetHeight * 3 + "px";
-    snum.style.left =
-        sliderRect.left +
-        (slider.value / slider.max) * slider.offsetWidth -
-        snum.offsetWidth / 2 +
-        "px";
+    snum.innerHTML = value + "px";
+    snum.style.left = (slider.value / slider.max) * slider.offsetWidth + "px";
 }
 
 //radio button text speed logic

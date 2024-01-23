@@ -54,7 +54,7 @@ body {
     height: 16.66%;
     width: 100%;
     top: 50%;
-    transform: translate(0,-50%);
+    transform: translate(0, -50%);
     background-color: #c5c8c6;
     transition: all 0.2s ease-in-out;
 }
@@ -76,7 +76,7 @@ body {
 
 /* hover animations */
 .menu-icon-wrapper:hover {
-    transform: translate(-3px,0);
+    transform: translate(-3px, 0);
 }
 
 .menu-icon-wrapper:hover .menu-icon::before,
@@ -86,18 +86,18 @@ body {
 }
 
 /* click animations */
-.menu-icon-middle:has( ~ .menu-icon-checkbox:checked) {
+.menu-icon-middle:has(~ .menu-icon-checkbox:checked) {
     background-color: transparent;
 }
 
-.menu-icon:has( ~ .menu-icon-checkbox:checked)::before {
+.menu-icon:has(~ .menu-icon-checkbox:checked)::before {
     left: 0;
     top: 50%;
     transform: translate(0, -50%) rotate(45deg) scale(110%);
     background-color: #a54242;
 }
 
-.menu-icon:has( ~ .menu-icon-checkbox:checked)::after {
+.menu-icon:has(~ .menu-icon-checkbox:checked)::after {
     left: 0;
     bottom: 50%;
     transform: translate(0, 50%) rotate(-45deg) scale(110%);
@@ -108,31 +108,36 @@ body {
 
 .menu {
     position: absolute;
-    width: 300px;
+    width: 150px;
     top: 10px;
     left: 100%;
     height: auto;
     background-color: #555;
+    opacity: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     transition: all 0.2s ease-in;
+    padding-right: 70px;
 }
 
 /* menu show on menu-icon checked */
-.menu:has( ~ .menu-icon-wrapper .menu-icon-checkbox:checked) {
-    transform: translate(calc(-100% - 10px),0);
+.menu:has(~ .menu-icon-wrapper .menu-icon-checkbox:checked) {
+    transform: translate(calc(-100% - 10px), 0);
+    opacity: 1;
 }
-
 
 /* other stuff */
 
+.font-options {
+    width: auto;
+}
+
 #snumber {
     color: #f1f1f1;
-    position: fixed;
+    position: absolute;
     display: none;
-    top: 0;
-    left: 0;
+    transform: translate(-50%, -50%);
 }
 
 #fontSize {
@@ -142,7 +147,6 @@ body {
     width: 90%;
     height: 10px;
     left: 0;
-    transform: translate(5%, 0);
     background-color: #f1f1f1;
     opacity: 0.7;
     transition: opacity 0.2s;
