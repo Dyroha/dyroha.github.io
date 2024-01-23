@@ -78,8 +78,15 @@ inputBox.addEventListener("keydown", function (event) {
         (event.key === "ArrowUp") |
         (event.key === "ArrowDown")
     ) {
-        console.log("l or r");
+        console.log("arrow pressed");
         event.preventDefault();
+        if (gamePlaying) {
+            if (event.key === "ArrowUp") {
+                changePlayerPosition(-1);
+            } else if (event.key === "ArrowDown") {
+                changePlayerPosition(1);
+            }
+        }
     }
 });
 

@@ -1,5 +1,3 @@
-let gamePlaying = false;
-let gameTimer = 500;
 const calcRegex = /^[0-9\s+\-*/()]*$/;
 // help command text
 let helpArr = [
@@ -17,11 +15,6 @@ document.body.addEventListener("keydown", (e) => {
         stopGame();
     }
 });
-
-function stopGame() {
-    // console.log("q pressed");
-    gamePlaying = false;
-}
 
 function doCommand(command) {
     if (command.startsWith("play game")) {
@@ -41,20 +34,4 @@ function doCommand(command) {
         printOutput("I do not know that command");
     }
     lastMessage = command;
-}
-
-function startGame() {
-    gamePlaying = true;
-    outputBox.innerHTML += "This is a game, quit with q </br>";
-    setTimeout(doGameLoop, gameTimer);
-}
-
-function doGameLoop() {
-    console.log("game loop");
-    if (gamePlaying) {
-        setTimeout(doGameLoop, gameTimer);
-    } else {
-        printOutput("Game finished");
-        resetInput();
-    }
 }
