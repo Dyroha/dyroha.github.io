@@ -1,5 +1,5 @@
 let gamePlaying = false;
-let gameTimer = 500;
+let gameTimer = 250;
 
 let game = document.createElement("div");
 let gameState = {
@@ -11,6 +11,16 @@ let gameCounter = 0;
 let barrier = "|   ";
 let playerLine = 1;
 let playerColumn = 4;
+
+//helper function
+
+String.prototype.replaceAt = function (index, replacement) {
+    return (
+        this.substring(0, index) +
+        replacement +
+        this.substring(index + replacement.length)
+    );
+};
 
 //controls
 
@@ -36,14 +46,7 @@ function resetGame() {
         2: " ".repeat(20),
     };
     gameCounter = 0;
-    game.innerHTML =
-        "<pre>~" +
-        gameState[0] +
-        "</br>~" +
-        gameState[1] +
-        "</br>~" +
-        gameState[2] +
-        "</br></pre>";
+    printGame();
 }
 
 function startGame() {
@@ -62,9 +65,9 @@ function doGameLoop() {
         // next game cycle
         setTimeout(doGameLoop, gameTimer);
     } else {
-        resetGame();
         outputBox.removeChild(game);
         printOutput("Game finished, score = " + gameCounter);
+        resetGame();
         resetInput();
     }
 }
@@ -73,23 +76,29 @@ function gameStateChange() {
     if (gameCounter++ % 4 == 0) {
         addBarriers();
     }
-    let gameText =
-        "<pre>~" +
-        gameState[0] +
-        "</br>~" +
-        gameState[1] +
-        "</br>~" +
-        gameState[2] +
-        "</br></pre>";
-    game.innerHTML = gameText;
     movePlayer();
     moveGame();
+    printGame();
+}
+
+function printGame() {
+    let gameText =
+    "<pre>~" +
+    gameState[0] +
+    "</br>~" +
+    gameState[1] +
+    "</br>~" +
+    gameState[2] +
+    "</br></pre>";
+game.innerHTML = gameText;
 }
 
 function moveGame() {
     for (let i = 0; i < 3; i++) {
         gameState[i] = gameState[i].slice(1);
     }
+    //else replace next 
+    gameState[playerLine] = gameState[playerLine].replaceAt(playerColumn, "-");
 }
 
 function addBarriers() {
@@ -115,16 +124,6 @@ function addBlank(line) {
     gameState[line] += "    ";
 }
 
-//helper function
-
-String.prototype.replaceAt = function (index, replacement) {
-    return (
-        this.substring(0, index) +
-        replacement +
-        this.substring(index + replacement.length)
-    );
-};
-
 //player movement
 
 function changePlayerPosition(direction) {
@@ -133,15 +132,10 @@ function changePlayerPosition(direction) {
 }
 
 function movePlayer() {
-    gameState[playerLine] = gameState[playerLine].replaceAt(playerColumn, ".");
-    if (playerLine == 0) {
-        gameState[1] = gameState[1].replaceAt(playerColumn, " ");
-        gameState[2] = gameState[2].replaceAt(playerColumn, " ");
-    } else if (playerLine == 1) {
-        gameState[0] = gameState[0].replaceAt(playerColumn, " ");
-        gameState[2] = gameState[2].replaceAt(playerColumn, " ");
-    } else {
-        gameState[0] = gameState[0].replaceAt(playerColumn, " ");
-        gameState[1] = gameState[1].replaceAt(playerColumn, " ");
+    // check if any are blocked
+    if (gameState[playerLine].charAt(playerColumn+1) == "|") {
+        //if player pos one is blocked then end game
+        stopGame();
     }
+
 }
