@@ -18,7 +18,7 @@ rtinput.appendChild(idleArrow);
 
 let inputBox = document.createElement("textarea");
 inputBox.type = "text";
-inputBox.rows = 1;
+inputBox.rows = 2;
 inputBox.autofocus = true;
 inputBox.spellcheck = false;
 inputBox.id = "text-input";
