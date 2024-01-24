@@ -55,7 +55,8 @@ function startGame() {
     gamePlaying = true;
     loss = false;
     gameCounter = 0;
-    outputBox.innerHTML += "press q to quit game</br>";
+    outputBox.innerHTML +=
+        "press q to quit game, use up and down arrows to move</br>";
     outputBox.appendChild(game);
     scrollToBottom();
     setTimeout(doGameLoop, gameTimer);
