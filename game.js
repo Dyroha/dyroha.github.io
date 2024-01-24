@@ -3,12 +3,12 @@ let gameTimer = 250;
 
 let game = document.createElement("div");
 let gameState = {
-    0: " ".repeat(20),
-    1: " ".repeat(20),
-    2: " ".repeat(20),
+    0: Array(20).fill(" "),
+    1: Array(20).fill(" "),
+    2: Array(20).fill(" "),
 };
 let gameCounter = 0;
-let barrier = "|   ";
+let barrier = ["|", " ", " ", " "];
 let playerLine = 1;
 let playerColumn = 4;
 
@@ -41,9 +41,9 @@ function stopGame() {
 function resetGame() {
     gameTimer = 250;
     gameState = {
-        0: " ".repeat(20),
-        1: " ".repeat(20),
-        2: " ".repeat(20),
+        0: Array(20).fill(" "),
+        1: Array(20).fill(" "),
+        2: Array(20).fill(" "),
     };
     gameCounter = 0;
     printGame();
@@ -66,7 +66,7 @@ function doGameLoop() {
         setTimeout(doGameLoop, gameTimer);
     } else {
         outputBox.removeChild(game);
-        printOutput("Game finished, score = " + gameCounter);
+        printOutput("Game over, score = " + gameCounter);
         resetGame();
         resetInput();
     }
@@ -79,26 +79,29 @@ function gameStateChange() {
     movePlayer();
     moveGame();
     printGame();
+    if (gameTimer > 100) {
+        gameTimer--;
+    }
 }
 
 function printGame() {
     let gameText =
-    "<pre>~" +
-    gameState[0] +
-    "</br>~" +
-    gameState[1] +
-    "</br>~" +
-    gameState[2] +
-    "</br></pre>";
-game.innerHTML = gameText;
+        "<pre>~" +
+        gameState[0].join("") +
+        "</br>~" +
+        gameState[1].join("") +
+        "</br>~" +
+        gameState[2].join("") +
+        "</br></pre>";
+    game.innerHTML = gameText;
 }
 
 function moveGame() {
     for (let i = 0; i < 3; i++) {
         gameState[i] = gameState[i].slice(1);
     }
-    //else replace next 
-    gameState[playerLine] = gameState[playerLine].replaceAt(playerColumn, "-");
+    //else replace next
+    gameState[playerLine][playerColumn] = "-";
 }
 
 function addBarriers() {
@@ -117,11 +120,11 @@ function addBarriers() {
 }
 
 function addBar(line) {
-    gameState[line] += barrier;
+    gameState[line].push(...barrier);
 }
 
 function addBlank(line) {
-    gameState[line] += "    ";
+    gameState[line].push(...[" ", " ", " ", " "]);
 }
 
 //player movement
@@ -133,9 +136,8 @@ function changePlayerPosition(direction) {
 
 function movePlayer() {
     // check if any are blocked
-    if (gameState[playerLine].charAt(playerColumn+1) == "|") {
+    if (gameState[playerLine][playerColumn + 1] === "|") {
         //if player pos one is blocked then end game
         stopGame();
     }
-
 }
