@@ -1,5 +1,4 @@
 const outputBox = document.getElementById("output");
-const inputBox = document.getElementById("text-input");
 let lastMessage = "";
 let pauseTime = 100;
 let startingText = "Hello user, type help to see the available commands";
@@ -7,6 +6,8 @@ let typing = false;
 let count = 0;
 
 let rtinput = document.createElement("div");
+rtinput.style.display = "flex";
+rtinput.style.gap = "10px";
 rtinput.id += "rtinput";
 
 let idleArrow = document.createElement("span");
@@ -15,9 +16,13 @@ idleArrow.classList += "input-start ";
 // idleArrow.classList += "idling";
 rtinput.appendChild(idleArrow);
 
-let i = document.createElement("span");
-i.classList += "rtinput-text";
-rtinput.appendChild(i);
+let inputBox = document.createElement("textarea");
+inputBox.type = "text";
+inputBox.rows = 1;
+inputBox.autofocus = true;
+inputBox.id = "text-input";
+inputBox.classList += "input-text font";
+rtinput.appendChild(inputBox);
 
 function letterByLetter(text, t) {
     if (text == "") {
@@ -25,6 +30,7 @@ function letterByLetter(text, t) {
         typing = false;
         idleOutputBox();
         scrollToBottom();
+        inputBox.focus();
         return;
     } else if (text.startsWith("\n")) {
         outputBox.innerHTML += "</br>";
@@ -66,12 +72,10 @@ inputBox.addEventListener("keyup", function (event) {
         }
     } else if (event.key === "ArrowUp") {
         inputBox.value = lastMessage;
-        i.innerHTML = lastMessage;
     }
-    updateRTInput();
 });
 
-inputBox.addEventListener("keydown", function (event) {
+document.body.addEventListener("keydown", function (event) {
     if (
         (event.key === "ArrowLeft") |
         (event.key === "ArrowRight") |
@@ -90,16 +94,11 @@ inputBox.addEventListener("keydown", function (event) {
 });
 
 function resetInput() {
-    i.innerHTML = "";
     inputBox.value = "";
 }
 
 function idleOutputBox() {
     outputBox.appendChild(rtinput);
-}
-
-function updateRTInput() {
-    i.innerHTML = inputBox.value;
 }
 
 function inputFocus() {
@@ -119,6 +118,7 @@ slider.oninput = function () {
     let value = this.value;
     let size = value.toString() + "px";
     outputBox.style.fontSize = size;
+    inputBox.style.fontSize = size;
     setCookie("fontSize", size, 7);
 
     moveSNum(this);

@@ -113,7 +113,7 @@ function gameStateChange() {
 }
 
 function printGame() {
-    let gameText = "<pre>" + waterPiece;
+    let gameText = "<pre class='font'>" + waterPiece;
     for (let i = 0; i < gameSize - 1; i++) {
         gameText += gameState[i].join("") + "</br>" + waterPiece;
     }

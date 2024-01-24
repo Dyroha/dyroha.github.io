@@ -6,17 +6,19 @@ body {
     width: 100%;
 }
 body {
-    background-color: antiquewhite;
     font-family: "VT323";
     font-size: 30px;
     color: #c5c8c6;
     background-color: #1d1f21;
 }
 
-pre {
+.font {
     font-family: "VT323";
     font-size: 30px;
     color: #c5c8c6;
+}
+
+pre {
     background-color: #1d1f21;
 }
 
@@ -226,12 +228,9 @@ pre {
 }
 
 #text-input {
-    position: absolute;
     box-sizing: border-box;
     border: none;
     user-select: none;
-    left: 10px;
-    bottom: 10px;
     background: transparent;
     appearance: none;
     -webkit-appearance: none;
@@ -239,12 +238,12 @@ pre {
     -ms-appearance: none;
     -o-appearance: none;
     outline: none;
-    color: transparent;
-}
-
-#text-input:hover {
-    background: white;
-    color: black;
+    resize: none;
+    color: #c5c8c6;
+    height: 100%;
+    width: 90%;
+    display: block;
+    caret-shape: underscore;
 }
 
 .input-start {
@@ -271,11 +270,6 @@ pre {
     50% {
         opacity: 0;
     }
-}
-
-#rtinput::after {
-    content: "|";
-    animation: idle 1s steps(1, end) infinite;
 }
 
 /* game colors */

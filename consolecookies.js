@@ -31,6 +31,7 @@ function initializeFontSize() {
             size.substring(0, size.length - 2)
         );
         outputBox.style.fontSize = size;
+        inputBox.style.fontSize = size;
     }
 }
 
