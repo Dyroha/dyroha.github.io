@@ -78,7 +78,6 @@ inputBox.addEventListener("keydown", function (event) {
         (event.key === "ArrowUp") |
         (event.key === "ArrowDown")
     ) {
-        console.log("arrow pressed");
         event.preventDefault();
         if (gamePlaying) {
             if (event.key === "ArrowUp") {
@@ -112,11 +111,6 @@ function scrollToBottom() {
 }
 
 printOutput(startingText);
-
-//Menu logic
-function menuClick() {
-    console.log("menu clicked");
-}
 
 //font size slider logic
 let slider = document.getElementById("fontSize");

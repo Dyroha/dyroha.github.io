@@ -18,6 +18,14 @@ document.body.addEventListener("keydown", (e) => {
 
 function doCommand(command) {
     if (command.startsWith("play game")) {
+        let difficulty = command.substring(9).trim();
+        if (difficulty == "easy") {
+            resetGame(2);
+        } else if (difficulty == "hard") {
+            resetGame(5);
+        } else {
+            resetGame(3);
+        }
         startGame();
     } else if (command.startsWith("echo")) {
         printOutput(command.substring(5).trim());

@@ -277,3 +277,21 @@ pre {
     content: "|";
     animation: idle 1s steps(1, end) infinite;
 }
+
+/* game colors */
+
+.water {
+    color: #82b1d7;
+}
+
+.bad {
+    color: #a54242;
+}
+
+.snake {
+    color: #8c9440;
+}
+
+.barrier {
+    color: #de935f;
+}

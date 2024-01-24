@@ -1,4 +1,5 @@
 let gamePlaying = false;
+let loss = false;
 let gameTimer = 250;
 
 let game = document.createElement("div");
@@ -8,19 +9,14 @@ let gameState = {
     2: Array(20).fill(" "),
 };
 let gameCounter = 0;
-let barrier = ["|", " ", " ", " "];
 let playerLine = 1;
 let playerColumn = 4;
-
-//helper function
-
-String.prototype.replaceAt = function (index, replacement) {
-    return (
-        this.substring(0, index) +
-        replacement +
-        this.substring(index + replacement.length)
-    );
-};
+let gameSize = 3;
+const playerPiece = "<span class='snake'>-</span>";
+const waterPiece = "<span class='water'>~</span>";
+const barrierPiece = "<span class='barrier'>|</span>";
+const goPiece = "<span class='bad'>x</span>";
+const barrier = [barrierPiece, " ", " ", " "];
 
 //controls
 
@@ -34,42 +30,74 @@ outputBox.addEventListener("keydown", function (e) {
     }
 });
 
-function stopGame() {
+function stopGame(type) {
+    // loss is 0 , quit is 1
+    if (type == 0) {
+        loss = true;
+    }
     gamePlaying = false;
 }
 
-function resetGame() {
+function resetGame(size) {
+    gameSize = size;
     gameTimer = 250;
-    gameState = {
-        0: Array(20).fill(" "),
-        1: Array(20).fill(" "),
-        2: Array(20).fill(" "),
-    };
+    playerLine = Math.floor(size / 2);
+
+    gameState = {};
+    for (let i = 0; i < size; i++) {
+        gameState[i] = Array(20).fill(" ");
+    }
     gameCounter = 0;
     printGame();
 }
 
 function startGame() {
     gamePlaying = true;
+    loss = false;
     gameCounter = 0;
     outputBox.innerHTML += "press q to quit game</br>";
     outputBox.appendChild(game);
+    scrollToBottom();
     setTimeout(doGameLoop, gameTimer);
 }
 
 function doGameLoop() {
-    console.log("game loop");
     if (gamePlaying) {
         // do game
         gameStateChange();
         // next game cycle
         setTimeout(doGameLoop, gameTimer);
     } else {
-        outputBox.removeChild(game);
-        printOutput("Game over, score = " + gameCounter);
-        resetGame();
-        resetInput();
+        if (loss) {
+            setTimeout(function () {
+                animateGameOver(playerColumn);
+            }, 1000);
+        } else {
+            quitGame();
+        }
     }
+}
+
+function animateGameOver(pos) {
+    if (pos < 0) {
+        quitGame();
+    } else {
+        for (let i = 0; i < gameSize; i++) {
+            if (gameState[i][pos] == playerPiece) {
+                gameState[i][pos] = goPiece;
+            }
+        }
+        printGame();
+        setTimeout(function () {
+            animateGameOver(--pos);
+        }, 100);
+    }
+}
+
+function quitGame() {
+    outputBox.removeChild(game);
+    printOutput("Game over, score = " + gameCounter);
+    resetInput();
 }
 
 function gameStateChange() {
@@ -85,37 +113,30 @@ function gameStateChange() {
 }
 
 function printGame() {
-    let gameText =
-        "<pre>~" +
-        gameState[0].join("") +
-        "</br>~" +
-        gameState[1].join("") +
-        "</br>~" +
-        gameState[2].join("") +
-        "</br></pre>";
+    let gameText = "<pre>" + waterPiece;
+    for (let i = 0; i < gameSize - 1; i++) {
+        gameText += gameState[i].join("") + "</br>" + waterPiece;
+    }
+    gameText += gameState[gameSize - 1].join("") + "</br></pre>";
     game.innerHTML = gameText;
 }
 
 function moveGame() {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < gameSize; i++) {
         gameState[i] = gameState[i].slice(1);
     }
     //else replace next
-    gameState[playerLine][playerColumn] = "-";
+    gameState[playerLine][playerColumn] = playerPiece;
 }
 
 function addBarriers() {
-    let i = Math.floor(Math.random() * 3);
+    let i = Math.floor(Math.random() * gameSize);
     addBlank(i);
-    if (i == 0) {
-        addBar(1);
-        addBar(2);
-    } else if (i == 1) {
-        addBar(0);
-        addBar(2);
-    } else {
-        addBar(0);
-        addBar(1);
+    for (let j = 0; j < gameSize; j++) {
+        if (j == i) {
+            continue;
+        }
+        addBar(j);
     }
 }
 
@@ -124,20 +145,19 @@ function addBar(line) {
 }
 
 function addBlank(line) {
-    gameState[line].push(...[" ", " ", " ", " "]);
+    gameState[line].push(...Array(4).fill(" "));
 }
 
 //player movement
 
 function changePlayerPosition(direction) {
-    playerLine = Math.min(2, Math.max(0, playerLine + direction));
-    console.log(playerLine);
+    playerLine = Math.min(gameSize - 1, Math.max(0, playerLine + direction));
 }
 
 function movePlayer() {
     // check if any are blocked
-    if (gameState[playerLine][playerColumn + 1] === "|") {
+    if (gameState[playerLine][playerColumn + 1] === barrierPiece) {
         //if player pos one is blocked then end game
-        stopGame();
+        stopGame(0);
     }
 }
