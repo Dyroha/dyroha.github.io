@@ -243,6 +243,7 @@ pre {
     height: 100%;
     width: 90%;
     display: block;
+    overflow: hidden;
     caret-shape: underscore;
 }
 

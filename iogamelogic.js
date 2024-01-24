@@ -20,6 +20,7 @@ let inputBox = document.createElement("textarea");
 inputBox.type = "text";
 inputBox.rows = 1;
 inputBox.autofocus = true;
+inputBox.spellcheck = false;
 inputBox.id = "text-input";
 inputBox.classList += "input-text font";
 rtinput.appendChild(inputBox);
@@ -71,17 +72,12 @@ inputBox.addEventListener("keyup", function (event) {
             resetInput();
         }
     } else if (event.key === "ArrowUp") {
-        inputBox.value = lastMessage;
+        inputBox.value = lastMessage.trim();
     }
 });
 
 document.body.addEventListener("keydown", function (event) {
-    if (
-        (event.key === "ArrowLeft") |
-        (event.key === "ArrowRight") |
-        (event.key === "ArrowUp") |
-        (event.key === "ArrowDown")
-    ) {
+    if ((event.key === "ArrowUp") | (event.key === "ArrowDown")) {
         event.preventDefault();
         if (gamePlaying) {
             if (event.key === "ArrowUp") {
