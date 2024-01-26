@@ -52,6 +52,9 @@ function resetGame(size) {
 }
 
 function startGame() {
+    // make size change with the rest of the page
+    game.style.fontSize = getCookie("fontSize");
+
     gamePlaying = true;
     loss = false;
     gameCounter = 0;
@@ -97,7 +100,7 @@ function animateGameOver(pos) {
 
 function quitGame() {
     outputBox.removeChild(game);
-    printOutput("Game over, score = " + gameCounter);
+    printOutput("Game over, score = " + gameCounter, 100);
     resetInput();
 }
 

@@ -14,12 +14,12 @@ body {
 
 .font {
     font-family: "VT323";
-    font-size: 30px;
     color: #c5c8c6;
 }
 
 pre {
     background-color: #1d1f21;
+    font: inherit;
 }
 
 /* menu icon css */
