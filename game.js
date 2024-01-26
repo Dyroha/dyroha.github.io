@@ -52,6 +52,9 @@ function resetGame(size) {
 }
 
 function startGame() {
+    // make size change with the rest of the page
+    game.style.fontSize = getCookie("fontSize");
+
     gamePlaying = true;
     loss = false;
     gameCounter = 0;
