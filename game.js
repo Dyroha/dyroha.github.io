@@ -100,7 +100,7 @@ function animateGameOver(pos) {
 
 function quitGame() {
     outputBox.removeChild(game);
-    printOutput("Game over, score = " + gameCounter);
+    printOutput("Game over, score = " + gameCounter, 100);
     resetInput();
 }
 

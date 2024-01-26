@@ -38,14 +38,14 @@ function letterByLetter(text, t) {
     } else {
         outputBox.innerHTML += text.charAt(0);
     }
-    setTimeout(() => letterByLetter(text.substring(1)), t);
+    setTimeout(() => letterByLetter(text.substring(1), pauseTime), t);
 }
 
 function outputNumber() {
     return "<span class='output-start'>[" + (count++).toString() + "]</span>";
 }
 
-function printOutput(text, t = pauseTime) {
+function printOutput(text, t) {
     typing = true;
     outputBox.innerHTML += outputNumber();
     letterByLetter(text, t);
@@ -104,8 +104,6 @@ function inputFocus() {
 function scrollToBottom() {
     outputBox.scrollTo(0, outputBox.scrollHeight);
 }
-
-printOutput(startingText);
 
 //font size slider logic
 let slider = document.getElementById("fontSize");
