@@ -5,6 +5,7 @@ body {
     overflow: hidden;
     width: 100%;
 }
+
 body {
     font-family: "VT323";
     font-size: 30px;
@@ -88,11 +89,11 @@ pre {
     transform: translate(-3px, 0);
 }
 
-.menu-icon-wrapper:hover .menu-icon::before,
-.menu-icon-wrapper:hover .menu-icon::after,
-.menu-icon-wrapper:hover .menu-icon-middle {
-    background-color: #888;
-}
+    .menu-icon-wrapper:hover .menu-icon::before,
+    .menu-icon-wrapper:hover .menu-icon::after,
+    .menu-icon-wrapper:hover .menu-icon-middle {
+        background-color: #888;
+    }
 
 /* click animations */
 .menu-icon-middle:has(~ .menu-icon-checkbox:checked) {
@@ -130,11 +131,11 @@ pre {
     padding-right: 70px;
 }
 
-/* menu show on menu-icon checked */
-.menu:has(~ .menu-icon-wrapper .menu-icon-checkbox:checked) {
-    transform: translate(calc(-100% - 10px), 0);
-    opacity: 1;
-}
+    /* menu show on menu-icon checked */
+    .menu:has(~ .menu-icon-wrapper .menu-icon-checkbox:checked) {
+        transform: translate(calc(-100% - 10px), 0);
+        opacity: 1;
+    }
 
 /* other stuff */
 
@@ -161,21 +162,21 @@ pre {
     transition: opacity 0.2s;
 }
 
-#fontSize:hover {
-    opacity: 1;
-}
+    #fontSize:hover {
+        opacity: 1;
+    }
 
-#fontSize::-webkit-slider-thumb {
-    appearance: none;
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    background: #82b1d7;
-}
+    #fontSize::-webkit-slider-thumb {
+        appearance: none;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        background: #82b1d7;
+    }
 
-#fontSize::-webkit-slider-thumb:hover {
-    background: #aad4f9;
-}
+        #fontSize::-webkit-slider-thumb:hover {
+            background: #aad4f9;
+        }
 
 .ts-options {
     width: 100%;
@@ -215,10 +216,10 @@ pre {
     background: #888;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
 
 #input {
     box-sizing: border-box;
@@ -245,6 +246,7 @@ pre {
     display: block;
     overflow: hidden;
     caret-shape: underscore;
+    font-size: inherit;
 }
 
 .input-start {
@@ -264,10 +266,10 @@ pre {
 }
 
 @keyframes idle {
-    from,
-    to {
+    from, to {
         opacity: 1;
     }
+
     50% {
         opacity: 0;
     }
