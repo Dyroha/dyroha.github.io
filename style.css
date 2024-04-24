@@ -29,12 +29,15 @@ body {
 h1 {
     font-size: 42px;
 }
+
 h2 {
     font-size: 33px;
 }
+
 h3 {
     font-size: 26px;
 }
+
 h4 {
     font-size: 20px;
 }
@@ -75,13 +78,7 @@ a:active {
     aspect-ratio: 1;
     border-radius: 50%;
     margin: 2%;
-    background: conic-gradient(
-        from var(--a),
-        var(--text) 60deg,
-        var(--border1) 90deg 150deg,
-        var(--border2) 210deg 270deg,
-        var(--text) 330deg
-    );
+    background: conic-gradient( from var(--a), var(--text) 60deg, var(--border1) 90deg 150deg, var(--border2) 210deg 270deg, var(--text) 330deg );
     animation: a 10s linear infinite;
 }
 
@@ -111,10 +108,12 @@ a:active {
 }
 
 .menu-items {
-    width: 350px;
+    width: auto;
     display: flex;
+    gap: 5px;
     justify-content: space-around;
-    align-items: center;
+    align-items: end;
+    padding: 10px;
 }
 
 .menu-item {
@@ -126,10 +125,10 @@ a:active {
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
-.menu-item:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.25);
-}
+    .menu-item:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.25);
+    }
 
 .title {
     grid-area: title;
@@ -183,13 +182,7 @@ a:active {
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     margin: 0 -50px;
     animation: t 20s infinite linear;
-    background: conic-gradient(
-        from 0deg at 50% 66.6%,
-        rgba(247, 239, 153, var(--t)) 60deg,
-        rgba(247, 142, 105, var(--r)) 60deg 180deg,
-        rgba(171, 225, 136, var(--l)) 180deg 300deg,
-        rgba(247, 239, 153, var(--t)) 300deg
-    );
+    background: conic-gradient( from 0deg at 50% 66.6%, rgba(247, 239, 153, var(--t)) 60deg, rgba(247, 142, 105, var(--r)) 60deg 180deg, rgba(171, 225, 136, var(--l)) 180deg 300deg, rgba(247, 239, 153, var(--t)) 300deg );
 }
 
 .flipped {
